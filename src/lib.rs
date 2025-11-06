@@ -49,6 +49,6 @@ async fn unpack() {
     use tokio::io::BufReader;
     let f = tokio::fs::File::open("test1.tar").await.unwrap();
     let mut buf = BufReader::new(f);
-    let mut arc = decompress::<&mut BufReader<tokio::fs::File>>(&mut buf).await;
+    let mut arc = Archive::new(&mut buf);
     arc.unpack("tests").await.unwrap();
 }
